@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tyra Miles — Technical Writer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500&family=Libre+Franklin:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0b;
+    --bg2: #131312;
+    --bg3: #1a1a18;
+    --line: rgba(255,255,255,0.08);
+    --line2: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #6b6a65;
+    --muted2: #9a9891;
+    --accent: #d4f53c;
+    --accent2: #4af0b0;
+    --danger: #f05a3c;
+    --syne: 'Syne', sans-serif;
+    --code: 'Fira Code', monospace;
+    --body: 'Libre Franklin', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
+    cursor: crosshair;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(12,12,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center;
+    padding: 0 3rem;
+    height: 56px;
+    gap: 3rem;
+  }
+  .nav-id {
+    font-family: var(--syne);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none; margin-left: auto;
+  }
+  .nav-links a {
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding-top: 56px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Grid background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 70%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-main {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 0;
+    align-items: end;
+    padding: 5rem 3rem 4rem;
+    position: relative;
+  }
+  .hero-left {}
+  .hero-kicker {
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-kicker::before {
+    content: '//';
+    color: var(--muted);
+  }
+  h1 {
+    font-family: var(--syne);
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  h1 .accent { color: var(--accent); }
+  h1 .block {
+    display: block;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted2);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--code);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.15s;
+    cursor: crosshair;
+    display: inline-block;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #bcdb2a; }
+  .btn-ghost {
+    border: 1px solid var(--line2);
+    color: var(--muted2);
+  }
+  .btn-ghost:hover { border-color: var(--muted2); color: var(--text); }
+
+  /* HERO RIGHT — terminal card */
+  .hero-right {
+    border-left: 1px solid var(--line);
+    padding: 2rem;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .terminal {
+    background: var(--bg2);
+    border: 1px solid var(--line2);
+    overflow: hidden;
+  }
+  .terminal-bar {
+    background: var(--bg3);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .t-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .terminal-title {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.04em;
+  }
+  .terminal-body {
+    padding: 1.25rem 1.5rem;
+    font-family: var(--code);
+    font-size: 12px;
+    line-height: 2;
+  }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-key { color: var(--accent2); }
+  .t-val { color: var(--muted2); }
+  .t-str { color: #e8a87c; }
+  .t-comment { color: var(--muted); font-style: italic; }
+  .t-line { display: block; }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--line);
+    gap: 1px;
+  }
+  .stat-cell {
+    background: var(--bg);
+    padding: 1.75rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-num {
+    font-family: var(--syne);
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text);
+  }
+  .stat-num .unit { font-size: 1.25rem; color: var(--accent); }
+  .stat-label {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 3rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1rem;
+  }
+  .section-num {
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  h2 {
+    font-family: var(--syne);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h2 .acc { color: var(--accent); }
+  .section-desc {
+    font-size: 14px;
+    color: var(--muted2);
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .timeline-item {
+    background: var(--bg);
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: transparent;
+    transition: background 0.15s;
+  }
+  .timeline-item:hover { background: var(--bg2); }
+  .timeline-item:hover::before { background: var(--accent); }
+  .timeline-item.current::before { background: var(--accent2); }
+  .t-date {
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    padding-top: 3px;
+  }
+  .t-current-badge {
+    font-family: var(--code);
+    font-size: 9px;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+    padding: 1px 6px;
+    margin-left: 8px;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+  }
+  .t-co {
+    font-family: var(--syne);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+  }
+  .t-role {
+    font-size: 13px;
+    color: var(--muted2);
+    margin-bottom: 0.75rem;
+  }
+  .t-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+  .t-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1rem;
+  }
+  .t-tag {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    border: 1px solid var(--line2);
+    padding: 2px 8px;
+    letter-spacing: 0.04em;
+  }
+  .t-metric-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+  .mini-metric {
+    text-align: right;
+  }
+  .mini-metric-num {
+    font-family: var(--syne);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .mini-metric-label {
+    font-family: var(--code);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* WORK / CASE STUDIES */
+  .cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .case-card {
+    background: var(--bg);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .case-card::after {
+    content: attr(data-num);
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-family: var(--syne);
+    font-size: 5rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .case-card:hover { background: var(--bg2); }
+  .case-type {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .case-type::before { content: '▸'; font-size: 8px; }
+  .case-card h3 {
+    font-family: var(--syne);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .case-co {
+    font-family: var(--code);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+  .case-desc {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.75;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+  /* FIXED METRICS STYLES - no cut-off, cohesive */
+  .case-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    margin-top: auto;
+  }
+  .case-metric {
+    flex: 1 0 auto;
+    min-width: 70px;
+  }
+  .case-metric-num {
+    font-family: var(--syne);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .case-metric-label {
+    font-family: var(--code);
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+  /* Ensure metrics never overflow on small screens */
+  @media (max-width: 480px) {
+    .case-metrics {
+      gap: 0.8rem;
+    }
+    .case-metric-num {
+      font-size: 1.2rem;
+      white-space: normal;
+    }
+    .case-metric-label {
+      font-size: 8px;
+    }
+  }
+
+  /* DOC SAMPLE */
+  .sample-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .sample-list-panel {
+    background: var(--bg2);
+    padding: 2rem;
+  }
+  .sample-list-panel p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .s-items { display: flex; flex-direction: column; gap: 1px; }
+  .s-item {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 1rem 1.25rem;
+    cursor: crosshair;
+    transition: border-color 0.15s;
+  }
+  .s-item:hover { border-color: var(--accent); }
+  .s-item-type {
+    font-family: var(--code);
+    font-size: 9px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .s-item-title {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .s-item-co {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .code-panel {
+    background: #0a0a09;
+    overflow: hidden;
+  }
+  .code-bar {
+    background: var(--bg3);
+    padding: 8px 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .c-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .code-file {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.04em;
+  }
+  .code-body {
+    padding: 1.5rem 2rem;
+    font-family: var(--code);
+    font-size: 12px;
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+  .c-h1 { color: #e8d5a3; font-weight: 500; font-size: 13px; }
+  .c-h2 { color: #7aacbf; font-weight: 500; margin-top: 1rem; }
+  .c-param { color: #b5a8d4; }
+  .c-val { color: #e8a87c; }
+  .c-str { color: #a8c99e; }
+  .c-comment { color: #3d3d38; font-style: italic; }
+  .c-note { color: var(--accent2); }
+  .c-line { display: block; }
+  .c-indent { padding-left: 1rem; }
+  .c-sep { display: block; border-top: 1px solid #1a1a16; margin: 0.75rem 0; }
+
+  /* SKILLS */
+  .skills-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .skill-col {
+    background: var(--bg);
+    padding: 1.75rem 2rem;
+    transition: background 0.15s;
+  }
+  .skill-col:hover { background: var(--bg2); }
+  .skill-cat {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 13px;
+    color: var(--muted2);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-list li::before {
+    content: '→';
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .skill-list li:last-child { border-bottom: none; }
+
+  /* EDUCATION */
+  .edu-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    max-width: 800px;
+  }
+  .edu-cell {
+    background: var(--bg);
+    padding: 2rem 2.5rem;
+  }
+  .edu-label {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .edu-degree {
+    font-family: var(--syne);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+    margin-bottom: 0.4rem;
+  }
+  .edu-school {
+    font-family: var(--code);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .edu-list { list-style: none; margin-top: 0.5rem; }
+  .edu-list li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; align-items: center;
+  }
+  .edu-list li::before { content: '—'; color: var(--line2); }
+  .edu-list li:last-child { border-bottom: none; }
+
+  /* CONTACT */
+  .contact-sec {
+    border-top: 1px solid var(--line);
+    background: var(--bg2);
+    padding: 5rem 3rem;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+  .contact-big {
+    font-family: var(--syne);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+  .contact-big .acc { color: var(--accent); }
+  .contact-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 400px;
+    line-height: 1.7;
+  }
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .contact-item {
+    background: var(--bg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    transition: background 0.15s;
+    color: inherit;
+  }
+  .contact-item:hover { background: var(--bg3); }
+  .contact-item:hover .c-arrow { color: var(--accent); }
+  .c-label {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+  }
+  .c-value {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .c-arrow {
+    font-size: 16px;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .footer-loc {
+    font-family: var(--code);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer-loc::before {
+    content: '◎';
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .hero-kicker { animation: slideIn 0.5s ease both 0.1s; }
+  h1 .block:nth-child(1) { animation: slideIn 0.5s ease both 0.2s; opacity: 0; animation-fill-mode: both; }
+  h1 .block:nth-child(2) { animation: slideIn 0.5s ease both 0.3s; opacity: 0; animation-fill-mode: both; }
+  h1 .block:nth-child(3) { animation: slideIn 0.5s ease both 0.4s; opacity: 0; animation-fill-mode: both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .hero-main { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .hero-right { border-left: none; border-top: 1px solid var(--line); padding: 1.5rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    section { padding: 4rem 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 1rem; }
+    .t-metric-col { align-items: flex-start; flex-direction: row; }
+    .sample-split { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .edu-row { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-id">Tyra Miles</a>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    available for hire
+  </div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#samples">Samples</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero::before"></div>
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-kicker">// Senior Technical Writer · API & Developer Docs</div>
+      <h1>
+        <span class="block">Docs</span>
+        <span class="block">that <span class="accent">ship</span></span>
+        <span class="block">product.</span>
+      </h1>
+      <p class="hero-desc">7 years writing developer documentation for billing infrastructure, legal tech, and SaaS APIs. I reduce the gap between complex systems and the engineers integrating them — measured in support tickets closed, not pages written.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn btn-primary">View case studies</a>
+        <a href="#samples" class="btn btn-ghost">Writing samples</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="t-dot" style="background:#e05252"></div>
+          <div class="t-dot" style="background:#e0b252"></div>
+          <div class="t-dot" style="background:#52a152"></div>
+          <div class="terminal-title">tyra-miles.json</div>
+        </div>
+        <div class="terminal-body">
+          <span class="t-line"><span class="t-prompt">{</span></span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"Tyra Miles"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Senior Technical Writer"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-str">"Downey, CA"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"remote"</span>: <span class="t-val">true</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"current"</span>: <span class="t-str">"Chargebee"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"specialties"</span>: [</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"REST API reference"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"developer onboarding"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"docs-as-code"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"content audits"</span></span>
+          <span class="t-line">&nbsp;&nbsp;],</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"yoe"</span>: <span class="t-val">7</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-str" style="color:#4af0b0">"open_to_offers"</span></span>
+          <span class="t-line"><span class="t-prompt">}</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-cell">
+      <div class="stat-num">58<span class="unit">%</span></div>
+      <div class="stat-label">Avg support ticket reduction</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">7<span class="unit">yr</span></div>
+      <div class="stat-label">API & developer docs</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">200<span class="unit">+</span></div>
+      <div class="stat-label">Endpoints documented</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">3<span class="unit">x</span></div>
+      <div class="stat-label">Docs coverage at Chargebee</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Experi<span class="acc">ence</span></h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item current">
+      <div class="t-date">
+        2022 – Present
+        <span class="t-current-badge">CURRENT</span>
+      </div>
+      <div>
+        <div class="t-co">Chargebee</div>
+        <div class="t-role">Senior Technical Writer, Developer Documentation</div>
+        <div class="t-desc">Own the end-to-end documentation for Chargebee's billing API — subscription lifecycle, invoicing, payment methods, webhooks, and revenue recognition. Rebuilt the API reference from fragmented legacy content into a structured OpenAPI 3.1 spec with multilingual code samples. Run quarterly developer surveys to track docs satisfaction and prioritize content gaps. Collaborate directly with Engineering and Product to document net-new features at launch.</div>
+        <div class="t-tags">
+          <span class="t-tag">OpenAPI 3.1</span>
+          <span class="t-tag">Docusaurus</span>
+          <span class="t-tag">Billing API</span>
+          <span class="t-tag">Webhooks</span>
+          <span class="t-tag">Docs-as-code</span>
+          <span class="t-tag">Developer surveys</span>
+        </div>
+      </div>
+      <div class="t-metric-col">
+        <div class="mini-metric">
+          <div class="mini-metric-num">58%</div>
+          <div class="mini-metric-label">Tickets down</div>
+        </div>
+        <div class="mini-metric">
+          <div class="mini-metric-num">3x</div>
+          <div class="mini-metric-label">Docs coverage</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-date">2018 – 2022</div>
+      <div>
+        <div class="t-co">Internet Brands</div>
+        <div class="t-role">Technical Writer II → Senior Technical Writer</div>
+        <div class="t-desc">Led documentation for Internet Brands' portfolio of legal and healthcare SaaS platforms — including WebMD Health Services and Martindale-Avvo integrations. Wrote API references, user guides, and admin documentation for products used by 50,000+ legal and medical professionals. Promoted from Technical Writer II to Senior in 18 months. Built the company's first docs style guide, adopted across 4 product lines.</div>
+        <div class="t-tags">
+          <span class="t-tag">Legal tech</span>
+          <span class="t-tag">Healthcare SaaS</span>
+          <span class="t-tag">Style guide</span>
+          <span class="t-tag">User guides</span>
+          <span class="t-tag">Admin docs</span>
+          <span class="t-tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="t-metric-col">
+        <div class="mini-metric">
+          <div class="mini-metric-num">4</div>
+          <div class="mini-metric-label">Product lines</div>
+        </div>
+        <div class="mini-metric">
+          <div class="mini-metric-num">18mo</div>
+          <div class="mini-metric-label">To promotion</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-date">2016 – 2018</div>
+      <div>
+        <div class="t-co">Clarity Wave</div>
+        <div class="t-role">Technical Writer</div>
+        <div class="t-desc">First technical writing role at a remote-first HR analytics startup. Documented the product API, wrote help center content, and created onboarding guides for enterprise clients. Built the help center from 0 to 80+ articles in 14 months using Intercom and Notion.</div>
+        <div class="t-tags">
+          <span class="t-tag">Help center</span>
+          <span class="t-tag">HR tech</span>
+          <span class="t-tag">Intercom</span>
+          <span class="t-tag">Enterprise onboarding</span>
+        </div>
+      </div>
+      <div class="t-metric-col">
+        <div class="mini-metric">
+          <div class="mini-metric-num">80+</div>
+          <div class="mini-metric-label">Articles built</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work" style="background: var(--bg2);">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Case <span class="acc">studies</span></h2>
+  </div>
+  <p class="section-desc">Documentation projects where the outcome was a business metric, not a page count.</p>
+
+  <div class="cases">
+
+    <div class="case-card" data-num="01">
+      <div class="case-type">API Reference · Chargebee</div>
+      <h3>Subscription lifecycle API — full reference rebuild</h3>
+      <div class="case-co">Chargebee Developer Hub · 2023</div>
+      <p class="case-desc">Chargebee's subscription API had grown to 160+ endpoints over 5 years with no single documentation owner. State transition logic was buried in a PDF, error codes had no descriptions, and support was fielding 300+ developer questions per month. Audited every endpoint, ran discovery sessions with 5 engineers, and rebuilt the reference in OpenAPI 3.1 with embedded Node, Python, Ruby, PHP, and Go samples. Shipped in 9 weeks.</p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">58%</div>
+          <div class="case-metric-label">Support drop</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">160+</div>
+          <div class="case-metric-label">Endpoints</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">9wk</div>
+          <div class="case-metric-label">Ship time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card" data-num="02">
+      <div class="case-type">Developer Onboarding · Chargebee</div>
+      <h3>First API call guide — from 3.2 days to under 4 hours</h3>
+      <div class="case-co">Chargebee Getting Started · 2024</div>
+      <p class="case-desc">Analytics showed new developers were averaging 3.2 days from signup to first successful API call. Ran 6 usability sessions with developers new to Chargebee, mapped every drop-off point, and designed a stack-adaptive quickstart (Node, Python, Ruby, PHP, Go) with inline sandbox credentials and runnable Postman collections. Time-to-first-call dropped to under 4 hours post-launch.</p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">88%</div>
+          <div class="case-metric-label">Faster onboarding</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">6</div>
+          <div class="case-metric-label">User sessions</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">5</div>
+          <div class="case-metric-label">Languages</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card" data-num="03">
+      <div class="case-type">Style Guide · Internet Brands</div>
+      <h3>Company-wide documentation style guide — built from scratch</h3>
+      <div class="case-co">Internet Brands · 2019</div>
+      <p class="case-desc">Internet Brands operated 6 product documentation sites with no shared standards — terminology, voice, formatting, and code conventions varied wildly across legal and healthcare platforms. Researched 4 industry style guides (Google, Microsoft, Apple, Divio), ran a content audit across all 6 products, and built a modular style guide adopted by 4 product lines. Reduced review cycles by 40% by resolving style debates before they happened.</p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">40%</div>
+          <div class="case-metric-label">Faster review</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">4</div>
+          <div class="case-metric-label">Lines adopted</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">6</div>
+          <div class="case-metric-label">Sites audited</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SAMPLES -->
+<section id="samples">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Writing <span class="acc">samples</span></h2>
+  </div>
+
+  <div class="sample-split">
+    <div class="sample-list-panel">
+      <p>Available formats: API reference, quickstart guides, conceptual docs, error references, changelog writing, and style guide documentation. All samples include the brief, review cycle, and outcome metrics on request.</p>
+      <div class="s-items">
+        <div class="s-item">
+          <div class="s-item-type">API Reference</div>
+          <div class="s-item-title">Invoice object — complete parameter & state reference</div>
+          <div class="s-item-co">Chargebee, 2023</div>
+        </div>
+        <div class="s-item">
+          <div class="s-item-type">Quickstart</div>
+          <div class="s-item-title">Zero to first charge — Chargebee Node.js quickstart</div>
+          <div class="s-item-co">Chargebee, 2024</div>
+        </div>
+        <div class="s-item">
+          <div class="s-item-type">Conceptual Guide</div>
+          <div class="s-item-title">How subscription state transitions work</div>
+          <div class="s-item-co">Chargebee, 2023</div>
+        </div>
+        <div class="s-item">
+          <div class="s-item-type">Error Reference</div>
+          <div class="s-item-title">Payment gateway errors — taxonomy & resolution paths</div>
+          <div class="s-item-co">Chargebee, 2024</div>
+        </div>
+        <div class="s-item">
+          <div class="s-item-type">Style Guide</div>
+          <div class="s-item-title">Internet Brands documentation style guide (excerpt)</div>
+          <div class="s-item-co">Internet Brands, 2019</div>
+        </div>
+        <div class="s-item">
+          <div class="s-item-type">Changelog</div>
+          <div class="s-item-title">Q2 2024 API release notes — developer-facing</div>
+          <div class="s-item-co">Chargebee, 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-bar">
+        <div class="c-dot" style="background:#e05252"></div>
+        <div class="c-dot" style="background:#e0b252"></div>
+        <div class="c-dot" style="background:#52a152"></div>
+        <div class="code-file">invoice-object.mdx</div>
+      </div>
+      <div class="code-body">
+        <span class="c-line c-h1"># Invoice object</span>
+        <span class="c-line" style="color:#7a7a72">Represents a finalized billing event for a customer.</span>
+        <span class="c-line" style="color:#7a7a72">Created automatically at the end of each billing cycle,</span>
+        <span class="c-line" style="color:#7a7a72">or manually via <span style="color:#a8c99e">`POST /invoices`</span>.</span>
+        <span class="c-sep"></span>
+        <span class="c-line c-h2">## Attributes</span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line"><span class="c-param">id</span> &nbsp;<span class="c-val">string</span></span>
+        <span class="c-line c-indent" style="color:#3d3d38">// Unique identifier. Prefix: <span class="c-str">`inv_`</span></span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line"><span class="c-param">status</span> &nbsp;<span class="c-val">enum</span></span>
+        <span class="c-line c-indent" style="color:#3d3d38">// One of: <span class="c-str">`paid`</span> <span class="c-str">`posted`</span> <span class="c-str">`payment_due`</span></span>
+        <span class="c-line c-indent" style="color:#3d3d38">//         <span class="c-str">`not_paid`</span> <span class="c-str">`voided`</span> <span class="c-str">`pending`</span></span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line"><span class="c-param">amount_due</span> &nbsp;<span class="c-val">integer</span></span>
+        <span class="c-line c-indent" style="color:#3d3d38">// In smallest currency unit (cents for USD).</span>
+        <span class="c-line c-indent" style="color:#3d3d38">// Use <span class="c-str">`currency_code`</span> to format for display.</span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line"><span class="c-param">due_date</span> &nbsp;<span class="c-val">timestamp</span> &nbsp;<span style="color:#4a4a45">optional</span></span>
+        <span class="c-line c-indent" style="color:#3d3d38">// Unix timestamp. Null for immediate-payment invoices.</span>
+        <span class="c-sep"></span>
+        <span class="c-line c-h2">## Example</span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line" style="color:#e8a87c">{</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"id"</span>: <span class="c-str">"inv_KmQ9xT4pRw2v"</span>,</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"status"</span>: <span class="c-str">"paid"</span>,</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"amount_due"</span>: <span class="c-val">4900</span>,</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"currency_code"</span>: <span class="c-str">"USD"</span>,</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"due_date"</span>: <span class="c-val">null</span>,</span>
+        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"subscription_id"</span>: <span class="c-str">"sub_HxKtL3QmVr9p"</span></span>
+        <span class="c-line" style="color:#e8a87c">}</span>
+        <span class="c-line">&nbsp;</span>
+        <span class="c-line"><span class="c-note">// Tip: voided invoices are excluded from revenue</span></span>
+        <span class="c-line"><span class="c-note">// reporting. Filter by status != 'voided' for MRR.</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section style="background: var(--bg2);">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Stack &amp; <span class="acc">skills</span></h2>
+  </div>
+  <div class="skills-wrap">
+    <div class="skill-col">
+      <div class="skill-cat">Doc types</div>
+      <ul class="skill-list">
+        <li>REST API reference</li>
+        <li>Developer quickstarts</li>
+        <li>Conceptual guides</li>
+        <li>Error & troubleshooting docs</li>
+        <li>Style guides</li>
+        <li>Changelogs</li>
+      </ul>
+    </div>
+    <div class="skill-col">
+      <div class="skill-cat">Technical</div>
+      <ul class="skill-list">
+        <li>OpenAPI 3.x / Swagger</li>
+        <li>Markdown, MDX</li>
+        <li>Git, GitHub</li>
+        <li>Docs-as-code</li>
+        <li>Postman / API testing</li>
+        <li>Python (light scripting)</li>
+      </ul>
+    </div>
+    <div class="skill-col">
+      <div class="skill-cat">Platforms</div>
+      <ul class="skill-list">
+        <li>Docusaurus, Mintlify</li>
+        <li>ReadMe.io</li>
+        <li>Confluence, Notion</li>
+        <li>Intercom (help center)</li>
+        <li>Jira, Linear</li>
+        <li>Figma (flow diagrams)</li>
+      </ul>
+    </div>
+    <div class="skill-col">
+      <div class="skill-cat">Process</div>
+      <ul class="skill-list">
+        <li>Content audits</li>
+        <li>Developer usability testing</li>
+        <li>Information architecture</li>
+        <li>Style guide authoring</li>
+        <li>Cross-functional collab</li>
+        <li>Metrics & analytics</li>
+      </ul>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Edu<span class="acc">cation</span></h2>
+  </div>
+  <div class="edu-row">
+    <div class="edu-cell">
+      <div class="edu-label">Degree</div>
+      <div class="edu-degree">B.A. English —<br>Professional Writing</div>
+      <div class="edu-school">California State University, Northridge · 2016</div>
+    </div>
+    <div class="edu-cell">
+      <div class="edu-label">Relevant coursework</div>
+      <ul class="edu-list">
+        <li>Technical & Scientific Writing</li>
+        <li>Document Design & Information Architecture</li>
+        <li>Editing for Publication</li>
+        <li>Writing for Digital Media</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-sec" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="contact-big">Let's<br><span class="acc">build</span><br>better<br>docs.</div>
+      <p class="contact-sub">Open to senior remote technical writing roles — API documentation, developer experience, and docs infrastructure. Based in Downey, CA. Available immediately.</p>
+    </div>
+    <div class="contact-items">
+      <a class="contact-item" href="mailto:tyratech23@gmail.com">
+        <div>
+          <div class="c-label">Email</div>
+          <div class="c-value">tyratech23@gmail.com</div>
+        </div>
+        <div class="c-arrow">↗</div>
+      </a>
+      <a class="contact-item" href="https://github.com/TyraTechWriter/tyra-miles-portfolio" target="_blank">
+        <div>
+          <div class="c-label">GitHub</div>
+          <div class="c-value">github.com/TyraTechWriter/tyra-miles-portfolio</div>
+        </div>
+        <div class="c-arrow">↗</div>
+      </a>
+      <!-- LinkedIn removed -->
+      <a class="contact-item" href="#">
+        <div>
+          <div class="c-label">Writing samples</div>
+          <div class="c-value">Available on request</div>
+        </div>
+        <div class="c-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">Tyra Miles · Senior Technical Writer · Portfolio 2025</div>
+  <div class="footer-loc">Downey, CA · Remote</div>
+</footer>
+
+</body>
+</html>
