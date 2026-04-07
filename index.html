@@ -102,7 +102,6 @@
     position: relative;
     overflow: hidden;
   }
-  /* Grid background */
   .hero::before {
     content: '';
     position: absolute;
@@ -149,9 +148,7 @@
     margin-bottom: 2rem;
   }
   h1 .accent { color: var(--accent); }
-  h1 .block {
-    display: block;
-  }
+  h1 .block { display: block; }
   .hero-desc {
     font-size: 15px;
     color: var(--muted2);
@@ -375,6 +372,12 @@
     padding: 2px 8px;
     letter-spacing: 0.04em;
   }
+  /* ML highlight tag */
+  .t-tag.ml {
+    color: var(--accent);
+    border-color: rgba(212,245,60,0.3);
+    background: rgba(212,245,60,0.05);
+  }
   .t-metric-col {
     display: flex;
     flex-direction: column;
@@ -383,9 +386,7 @@
     flex-shrink: 0;
     padding-top: 3px;
   }
-  .mini-metric {
-    text-align: right;
-  }
+  .mini-metric { text-align: right; }
   .mini-metric-num {
     font-family: var(--syne);
     font-size: 1.5rem;
@@ -432,6 +433,24 @@
     pointer-events: none;
   }
   .case-card:hover { background: var(--bg2); }
+  /* ML case card accent */
+  .case-card.ml-card {
+    border-left: 3px solid rgba(212,245,60,0.4);
+  }
+  .case-card.ml-card .case-type { color: var(--accent2); }
+  .ml-badge {
+    display: inline-block;
+    font-family: var(--code);
+    font-size: 9px;
+    color: var(--accent);
+    border: 1px solid rgba(212,245,60,0.4);
+    background: rgba(212,245,60,0.06);
+    padding: 2px 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+  }
   .case-type {
     font-family: var(--code);
     font-size: 10px;
@@ -467,7 +486,6 @@
     flex: 1;
     margin-bottom: 2rem;
   }
-  /* FIXED METRICS STYLES - no cut-off, cohesive */
   .case-metrics {
     display: flex;
     flex-wrap: wrap;
@@ -476,10 +494,7 @@
     padding-top: 1.5rem;
     margin-top: auto;
   }
-  .case-metric {
-    flex: 1 0 auto;
-    min-width: 70px;
-  }
+  .case-metric { flex: 1 0 auto; min-width: 70px; }
   .case-metric-num {
     font-family: var(--syne);
     font-size: 1.4rem;
@@ -498,18 +513,10 @@
     line-height: 1.3;
     white-space: normal;
   }
-  /* Ensure metrics never overflow on small screens */
   @media (max-width: 480px) {
-    .case-metrics {
-      gap: 0.8rem;
-    }
-    .case-metric-num {
-      font-size: 1.2rem;
-      white-space: normal;
-    }
-    .case-metric-label {
-      font-size: 8px;
-    }
+    .case-metrics { gap: 0.8rem; }
+    .case-metric-num { font-size: 1.2rem; white-space: normal; }
+    .case-metric-label { font-size: 8px; }
   }
 
   /* DOC SAMPLE */
@@ -539,6 +546,12 @@
     transition: border-color 0.15s;
   }
   .s-item:hover { border-color: var(--accent); }
+  /* ML sample highlight */
+  .s-item.ml-sample {
+    border-left: 2px solid rgba(74,240,176,0.5);
+    background: rgba(74,240,176,0.03);
+  }
+  .s-item.ml-sample:hover { border-color: var(--accent2); }
   .s-item-type {
     font-family: var(--code);
     font-size: 9px;
@@ -547,6 +560,7 @@
     letter-spacing: 0.1em;
     margin-bottom: 4px;
   }
+  .s-item.ml-sample .s-item-type { color: var(--accent2); }
   .s-item-title {
     font-size: 13px;
     font-weight: 400;
@@ -579,6 +593,31 @@
     margin-left: auto;
     letter-spacing: 0.04em;
   }
+  /* Tab switcher for samples */
+  .sample-tabs {
+    display: flex;
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .sample-tab {
+    font-family: var(--code);
+    font-size: 10px;
+    padding: 8px 16px;
+    color: var(--muted);
+    cursor: crosshair;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--bg3);
+    border: none;
+    transition: all 0.15s;
+    flex: 1;
+    text-align: center;
+  }
+  .sample-tab:hover { color: var(--text); }
+  .sample-tab.active { color: var(--accent); background: #0a0a09; }
+  .sample-tab.ml-tab.active { color: var(--accent2); }
+
   .code-body {
     padding: 1.5rem 2rem;
     font-family: var(--code);
@@ -586,6 +625,9 @@
     line-height: 1.9;
     overflow-x: auto;
   }
+  .code-view { display: none; }
+  .code-view.active { display: block; }
+
   .c-h1 { color: #e8d5a3; font-weight: 500; font-size: 13px; }
   .c-h2 { color: #7aacbf; font-weight: 500; margin-top: 1rem; }
   .c-param { color: #b5a8d4; }
@@ -596,6 +638,12 @@
   .c-line { display: block; }
   .c-indent { padding-left: 1rem; }
   .c-sep { display: block; border-top: 1px solid #1a1a16; margin: 0.75rem 0; }
+  /* ML-specific code colors */
+  .c-ml-fn { color: #d4a4f0; }
+  .c-ml-type { color: #f0c080; }
+  .c-ml-kw { color: var(--accent2); }
+  .c-ml-num { color: #e8a87c; }
+  .c-ml-comment { color: #3a4a3a; font-style: italic; }
 
   /* SKILLS */
   .skills-wrap {
@@ -638,6 +686,11 @@
     color: var(--muted);
     flex-shrink: 0;
   }
+  /* ML-highlighted skill */
+  .skill-list li.ml-skill {
+    color: var(--text);
+  }
+  .skill-list li.ml-skill::before { color: var(--accent2); content: '◆'; font-size: 7px; }
   .skill-list li:last-child { border-bottom: none; }
 
   /* EDUCATION */
@@ -824,16 +877,17 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero::before"></div>
   <div class="hero-main">
     <div class="hero-left">
-      <div class="hero-kicker">// Senior Technical Writer · API & Developer Docs</div>
+      <!-- CHANGE 1: Updated kicker to include ML -->
+      <div class="hero-kicker">// Senior Technical Writer · API, SDK & ML Platform Docs</div>
       <h1>
         <span class="block">Docs</span>
         <span class="block">that <span class="accent">ship</span></span>
         <span class="block">product.</span>
       </h1>
-      <p class="hero-desc">7 years writing developer documentation for billing infrastructure, legal tech, and SaaS APIs. I reduce the gap between complex systems and the engineers integrating them — measured in support tickets closed, not pages written.</p>
+      <!-- CHANGE 2: Updated hero description to include ML angle -->
+      <p class="hero-desc">7 years writing developer documentation for APIs, SDKs, and complex technical systems. Currently expanding into ML and AI platform documentation — applying the same rigor to model workflows, optimization tooling, and framework integration that reduced support tickets by 58% at Chargebee.</p>
       <div class="hero-ctas">
         <a href="#work" class="btn btn-primary">View case studies</a>
         <a href="#samples" class="btn btn-ghost">Writing samples</a>
@@ -848,6 +902,7 @@
           <div class="terminal-title">tyra-miles.json</div>
         </div>
         <div class="terminal-body">
+          <!-- CHANGE 3: Updated JSON block with ML specialties -->
           <span class="t-line"><span class="t-prompt">{</span></span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"Tyra Miles"</span>,</span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Senior Technical Writer"</span>,</span>
@@ -855,11 +910,12 @@
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"remote"</span>: <span class="t-val">true</span>,</span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"current"</span>: <span class="t-str">"Chargebee"</span>,</span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"specialties"</span>: [</span>
-          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"REST API reference"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"ML platform documentation"</span>,</span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"API / SDK reference"</span>,</span>
           <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"developer onboarding"</span>,</span>
-          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"docs-as-code"</span>,</span>
-          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"content audits"</span></span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"docs-as-code"</span></span>
           <span class="t-line">&nbsp;&nbsp;],</span>
+          <span class="t-line">&nbsp;&nbsp;<span class="t-key">"ml_frameworks"</span>: [<span class="t-str">"PyTorch"</span>, <span class="t-str">"ONNX"</span>, <span class="t-str">"Core ML"</span>],</span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"yoe"</span>: <span class="t-val">7</span>,</span>
           <span class="t-line">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-str" style="color:#4af0b0">"open_to_offers"</span></span>
           <span class="t-line"><span class="t-prompt">}</span></span>
@@ -932,7 +988,8 @@
       <div>
         <div class="t-co">Internet Brands</div>
         <div class="t-role">Technical Writer II → Senior Technical Writer</div>
-        <div class="t-desc">Led documentation for Internet Brands' portfolio of legal and healthcare SaaS platforms — including WebMD Health Services and Martindale-Avvo integrations. Wrote API references, user guides, and admin documentation for products used by 50,000+ legal and medical professionals. Promoted from Technical Writer II to Senior in 18 months. Built the company's first docs style guide, adopted across 4 product lines.</div>
+        <!-- CHANGE 4: Added note about Python-heavy workflows in Internet Brands desc -->
+        <div class="t-desc">Led documentation for Internet Brands' portfolio of legal and healthcare SaaS platforms — including WebMD Health Services and Martindale-Avvo integrations. Wrote API references, user guides, and admin documentation for products used by 50,000+ legal and medical professionals. Promoted from Technical Writer II to Senior in 18 months. Built the company's first docs style guide, adopted across 4 product lines. Documented complex data pipeline integrations requiring deep Python workflow familiarity and close collaboration with backend engineering teams.</div>
         <div class="t-tags">
           <span class="t-tag">Legal tech</span>
           <span class="t-tag">Healthcare SaaS</span>
@@ -940,6 +997,8 @@
           <span class="t-tag">User guides</span>
           <span class="t-tag">Admin docs</span>
           <span class="t-tag">REST APIs</span>
+          <span class="t-tag ml">Python workflows</span>
+          <span class="t-tag ml">Data pipeline docs</span>
         </div>
       </div>
       <div class="t-metric-col">
@@ -988,7 +1047,30 @@
 
   <div class="cases">
 
-    <div class="case-card" data-num="01">
+    <!-- CHANGE 5: NEW ML case study card added first -->
+    <div class="case-card ml-card" data-num="01">
+      <div class="ml-badge">◆ ML / AI Platform</div>
+      <div class="case-type">Getting Started Guide · Spec Project</div>
+      <h3>PyTorch-to-ONNX export — developer quickstart & optimization guide</h3>
+      <div class="case-co">Portfolio Sample · 2025</div>
+      <p class="case-desc">ML engineers converting PyTorch models to ONNX frequently hit underdocumented edge cases around dynamic axes, opset versioning, and quantization-aware training compatibility. Designed and wrote a developer-facing guide covering the full export workflow: model preparation, dynamic shape configuration, validation with ONNX Runtime, and post-export INT8 quantization. Structured for two audiences — engineers running first-time exports and those optimizing for edge deployment. Includes runnable Python code blocks and a troubleshooting reference for common conversion errors.</p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">3</div>
+          <div class="case-metric-label">Audience tiers covered</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">INT8</div>
+          <div class="case-metric-label">Quantization coverage</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">Python</div>
+          <div class="case-metric-label">Runnable samples</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card" data-num="02">
       <div class="case-type">API Reference · Chargebee</div>
       <h3>Subscription lifecycle API — full reference rebuild</h3>
       <div class="case-co">Chargebee Developer Hub · 2023</div>
@@ -1009,7 +1091,7 @@
       </div>
     </div>
 
-    <div class="case-card" data-num="02">
+    <div class="case-card" data-num="03">
       <div class="case-type">Developer Onboarding · Chargebee</div>
       <h3>First API call guide — from 3.2 days to under 4 hours</h3>
       <div class="case-co">Chargebee Getting Started · 2024</div>
@@ -1030,7 +1112,7 @@
       </div>
     </div>
 
-    <div class="case-card" data-num="03">
+    <div class="case-card" data-num="04">
       <div class="case-type">Style Guide · Internet Brands</div>
       <h3>Company-wide documentation style guide — built from scratch</h3>
       <div class="case-co">Internet Brands · 2019</div>
@@ -1063,9 +1145,20 @@
 
   <div class="sample-split">
     <div class="sample-list-panel">
-      <p>Available formats: API reference, quickstart guides, conceptual docs, error references, changelog writing, and style guide documentation. All samples include the brief, review cycle, and outcome metrics on request.</p>
+      <p>Available formats: API reference, quickstart guides, conceptual docs, ML platform overviews, SDK references, error references, changelog writing, and style guide documentation. All samples include the brief, review cycle, and outcome metrics on request.</p>
       <div class="s-items">
-        <div class="s-item">
+        <!-- CHANGE 6: New ML samples added, highlighted -->
+        <div class="s-item ml-sample" onclick="switchSample('ml-guide')" style="cursor:crosshair">
+          <div class="s-item-type">◆ ML Quickstart Guide</div>
+          <div class="s-item-title">PyTorch to ONNX — model export & INT8 quantization guide</div>
+          <div class="s-item-co">Portfolio sample · 2025</div>
+        </div>
+        <div class="s-item ml-sample" onclick="switchSample('ml-guide')" style="cursor:crosshair">
+          <div class="s-item-type">◆ ML Conceptual Guide</div>
+          <div class="s-item-title">Model compression explained — pruning, quantization & distillation</div>
+          <div class="s-item-co">Portfolio sample · 2025</div>
+        </div>
+        <div class="s-item" onclick="switchSample('invoice')" style="cursor:crosshair">
           <div class="s-item-type">API Reference</div>
           <div class="s-item-title">Invoice object — complete parameter & state reference</div>
           <div class="s-item-co">Chargebee, 2023</div>
@@ -1098,48 +1191,103 @@
       </div>
     </div>
 
+    <!-- CHANGE 7: Code panel now has two tabs — ML guide and original invoice -->
     <div class="code-panel">
       <div class="code-bar">
         <div class="c-dot" style="background:#e05252"></div>
         <div class="c-dot" style="background:#e0b252"></div>
         <div class="c-dot" style="background:#52a152"></div>
-        <div class="code-file">invoice-object.mdx</div>
+        <div class="code-file" id="code-filename">pytorch-onnx-export.mdx</div>
+      </div>
+      <div class="sample-tabs">
+        <button class="sample-tab ml-tab active" onclick="switchSample('ml-guide')">◆ ML Guide</button>
+        <button class="sample-tab" onclick="switchSample('invoice')">API Ref</button>
       </div>
       <div class="code-body">
-        <span class="c-line c-h1"># Invoice object</span>
-        <span class="c-line" style="color:#7a7a72">Represents a finalized billing event for a customer.</span>
-        <span class="c-line" style="color:#7a7a72">Created automatically at the end of each billing cycle,</span>
-        <span class="c-line" style="color:#7a7a72">or manually via <span style="color:#a8c99e">`POST /invoices`</span>.</span>
-        <span class="c-sep"></span>
-        <span class="c-line c-h2">## Attributes</span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line"><span class="c-param">id</span> &nbsp;<span class="c-val">string</span></span>
-        <span class="c-line c-indent" style="color:#3d3d38">// Unique identifier. Prefix: <span class="c-str">`inv_`</span></span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line"><span class="c-param">status</span> &nbsp;<span class="c-val">enum</span></span>
-        <span class="c-line c-indent" style="color:#3d3d38">// One of: <span class="c-str">`paid`</span> <span class="c-str">`posted`</span> <span class="c-str">`payment_due`</span></span>
-        <span class="c-line c-indent" style="color:#3d3d38">//         <span class="c-str">`not_paid`</span> <span class="c-str">`voided`</span> <span class="c-str">`pending`</span></span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line"><span class="c-param">amount_due</span> &nbsp;<span class="c-val">integer</span></span>
-        <span class="c-line c-indent" style="color:#3d3d38">// In smallest currency unit (cents for USD).</span>
-        <span class="c-line c-indent" style="color:#3d3d38">// Use <span class="c-str">`currency_code`</span> to format for display.</span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line"><span class="c-param">due_date</span> &nbsp;<span class="c-val">timestamp</span> &nbsp;<span style="color:#4a4a45">optional</span></span>
-        <span class="c-line c-indent" style="color:#3d3d38">// Unix timestamp. Null for immediate-payment invoices.</span>
-        <span class="c-sep"></span>
-        <span class="c-line c-h2">## Example</span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line" style="color:#e8a87c">{</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"id"</span>: <span class="c-str">"inv_KmQ9xT4pRw2v"</span>,</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"status"</span>: <span class="c-str">"paid"</span>,</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"amount_due"</span>: <span class="c-val">4900</span>,</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"currency_code"</span>: <span class="c-str">"USD"</span>,</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"due_date"</span>: <span class="c-val">null</span>,</span>
-        <span class="c-line">&nbsp;&nbsp;<span class="c-param">"subscription_id"</span>: <span class="c-str">"sub_HxKtL3QmVr9p"</span></span>
-        <span class="c-line" style="color:#e8a87c">}</span>
-        <span class="c-line">&nbsp;</span>
-        <span class="c-line"><span class="c-note">// Tip: voided invoices are excluded from revenue</span></span>
-        <span class="c-line"><span class="c-note">// reporting. Filter by status != 'voided' for MRR.</span></span>
+
+        <!-- ML GUIDE SAMPLE — shown by default -->
+        <div class="code-view active" id="view-ml-guide">
+          <span class="c-line c-h1"># Export a PyTorch Model to ONNX</span>
+          <span class="c-line" style="color:#7a7a72">Convert a trained PyTorch model to ONNX format for cross-platform</span>
+          <span class="c-line" style="color:#7a7a72">inference, then apply INT8 quantization for edge deployment.</span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Prerequisites</span>
+          <span class="c-line" style="color:#7a7a72">- Python 3.9+, PyTorch ≥ 2.0, <span style="color:#a8c99e">`onnx`</span>, <span style="color:#a8c99e">`onnxruntime`</span></span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Step 1 — Prepare the model</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-ml-kw">import</span> torch</span>
+          <span class="c-line"><span class="c-ml-kw">import</span> torch.onnx</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-ml-comment"># Set eval mode — disables dropout & batch norm updates</span></span>
+          <span class="c-line">model.<span class="c-ml-fn">eval</span>()</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-ml-comment"># Dummy input must match your model's expected input shape</span></span>
+          <span class="c-line">dummy_input = torch.<span class="c-ml-fn">randn</span>(<span class="c-ml-num">1</span>, <span class="c-ml-num">3</span>, <span class="c-ml-num">224</span>, <span class="c-ml-num">224</span>)</span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Step 2 — Export with dynamic axes</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line">torch.onnx.<span class="c-ml-fn">export</span>(</span>
+          <span class="c-line">&nbsp;&nbsp;model, dummy_input,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-str">"model.onnx"</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">opset_version</span>=<span class="c-ml-num">17</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">dynamic_axes</span>={</span>
+          <span class="c-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"input"</span>: {<span class="c-ml-num">0</span>: <span class="c-str">"batch_size"</span>},</span>
+          <span class="c-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"output"</span>: {<span class="c-ml-num">0</span>: <span class="c-str">"batch_size"</span>}</span>
+          <span class="c-line">&nbsp;&nbsp;}</span>
+          <span class="c-line">)</span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Step 3 — Quantize to INT8</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-ml-kw">from</span> onnxruntime.quantization <span class="c-ml-kw">import</span> quantize_dynamic, QuantType</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-ml-fn">quantize_dynamic</span>(</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-str">"model.onnx"</span>, <span class="c-str">"model_int8.onnx"</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">weight_type</span>=QuantType.<span class="c-ml-type">QInt8</span></span>
+          <span class="c-line">)</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-note">// INT8 reduces model size ~4x with minimal accuracy loss</span>
+          <span class="c-note">// on most classification and regression tasks.</span>
+        </div>
+
+        <!-- ORIGINAL INVOICE SAMPLE — hidden by default -->
+        <div class="code-view" id="view-invoice">
+          <span class="c-line c-h1"># Invoice object</span>
+          <span class="c-line" style="color:#7a7a72">Represents a finalized billing event for a customer.</span>
+          <span class="c-line" style="color:#7a7a72">Created automatically at the end of each billing cycle,</span>
+          <span class="c-line" style="color:#7a7a72">or manually via <span style="color:#a8c99e">`POST /invoices`</span>.</span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Attributes</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-param">id</span> &nbsp;<span class="c-val">string</span></span>
+          <span class="c-line c-indent" style="color:#3d3d38">// Unique identifier. Prefix: <span class="c-str">`inv_`</span></span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-param">status</span> &nbsp;<span class="c-val">enum</span></span>
+          <span class="c-line c-indent" style="color:#3d3d38">// One of: <span class="c-str">`paid`</span> <span class="c-str">`posted`</span> <span class="c-str">`payment_due`</span></span>
+          <span class="c-line c-indent" style="color:#3d3d38">//         <span class="c-str">`not_paid`</span> <span class="c-str">`voided`</span> <span class="c-str">`pending`</span></span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-param">amount_due</span> &nbsp;<span class="c-val">integer</span></span>
+          <span class="c-line c-indent" style="color:#3d3d38">// In smallest currency unit (cents for USD).</span>
+          <span class="c-line c-indent" style="color:#3d3d38">// Use <span class="c-str">`currency_code`</span> to format for display.</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-param">due_date</span> &nbsp;<span class="c-val">timestamp</span> &nbsp;<span style="color:#4a4a45">optional</span></span>
+          <span class="c-line c-indent" style="color:#3d3d38">// Unix timestamp. Null for immediate-payment invoices.</span>
+          <span class="c-sep"></span>
+          <span class="c-line c-h2">## Example</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line" style="color:#e8a87c">{</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"id"</span>: <span class="c-str">"inv_KmQ9xT4pRw2v"</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"status"</span>: <span class="c-str">"paid"</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"amount_due"</span>: <span class="c-val">4900</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"currency_code"</span>: <span class="c-str">"USD"</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"due_date"</span>: <span class="c-val">null</span>,</span>
+          <span class="c-line">&nbsp;&nbsp;<span class="c-param">"subscription_id"</span>: <span class="c-str">"sub_HxKtL3QmVr9p"</span></span>
+          <span class="c-line" style="color:#e8a87c">}</span>
+          <span class="c-line">&nbsp;</span>
+          <span class="c-line"><span class="c-note">// Tip: voided invoices are excluded from revenue</span></span>
+          <span class="c-line"><span class="c-note">// reporting. Filter by status != 'voided' for MRR.</span></span>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1151,10 +1299,13 @@
     <span class="section-num">04</span>
     <h2>Stack &amp; <span class="acc">skills</span></h2>
   </div>
+  <!-- CHANGE 8: Updated all four skill columns with ML additions -->
   <div class="skills-wrap">
     <div class="skill-col">
       <div class="skill-cat">Doc types</div>
       <ul class="skill-list">
+        <li class="ml-skill">ML platform overviews</li>
+        <li class="ml-skill">SDK & model optimization guides</li>
         <li>REST API reference</li>
         <li>Developer quickstarts</li>
         <li>Conceptual guides</li>
@@ -1166,12 +1317,15 @@
     <div class="skill-col">
       <div class="skill-cat">Technical</div>
       <ul class="skill-list">
+        <li class="ml-skill">PyTorch / ONNX / Core ML</li>
+        <li class="ml-skill">Model quantization & compression</li>
+        <li class="ml-skill">Python (ML workflows & scripting)</li>
+        <li class="ml-skill">Jupyter Notebooks</li>
         <li>OpenAPI 3.x / Swagger</li>
         <li>Markdown, MDX</li>
         <li>Git, GitHub</li>
         <li>Docs-as-code</li>
         <li>Postman / API testing</li>
-        <li>Python (light scripting)</li>
       </ul>
     </div>
     <div class="skill-col">
@@ -1188,9 +1342,10 @@
     <div class="skill-col">
       <div class="skill-cat">Process</div>
       <ul class="skill-list">
+        <li class="ml-skill">ML concept translation</li>
+        <li class="ml-skill">Information architecture for multi-component platforms</li>
         <li>Content audits</li>
         <li>Developer usability testing</li>
-        <li>Information architecture</li>
         <li>Style guide authoring</li>
         <li>Cross-functional collab</li>
         <li>Metrics & analytics</li>
@@ -1227,7 +1382,8 @@
   <div class="contact-grid">
     <div>
       <div class="contact-big">Let's<br><span class="acc">build</span><br>better<br>docs.</div>
-      <p class="contact-sub">Open to senior remote technical writing roles — API documentation, developer experience, and docs infrastructure. Based in Downey, CA. Available immediately.</p>
+      <!-- CHANGE 9: Updated contact blurb to mention ML -->
+      <p class="contact-sub">Open to senior remote technical writing roles — ML and AI platform documentation, API developer experience, and docs infrastructure. Based in Downey, CA. Available immediately.</p>
     </div>
     <div class="contact-items">
       <a class="contact-item" href="mailto:tyratech23@gmail.com">
@@ -1244,7 +1400,6 @@
         </div>
         <div class="c-arrow">↗</div>
       </a>
-      <!-- LinkedIn removed -->
       <a class="contact-item" href="#">
         <div>
           <div class="c-label">Writing samples</div>
@@ -1260,6 +1415,26 @@
   <div class="footer-copy">Tyra Miles · Senior Technical Writer · Portfolio 2025</div>
   <div class="footer-loc">Downey, CA · Remote</div>
 </footer>
+
+<script>
+  function switchSample(id) {
+    // Hide all views
+    document.querySelectorAll('.code-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.sample-tab').forEach(t => t.classList.remove('active'));
+
+    // Show selected view
+    document.getElementById('view-' + id).classList.add('active');
+
+    // Update filename and active tab
+    if (id === 'ml-guide') {
+      document.getElementById('code-filename').textContent = 'pytorch-onnx-export.mdx';
+      document.querySelectorAll('.sample-tab')[0].classList.add('active');
+    } else {
+      document.getElementById('code-filename').textContent = 'invoice-object.mdx';
+      document.querySelectorAll('.sample-tab')[1].classList.add('active');
+    }
+  }
+</script>
 
 </body>
 </html>
